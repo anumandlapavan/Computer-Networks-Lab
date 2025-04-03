@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Flipping Game</title>
+    <link rel="stylesheet" href="flipgame.css" />
+  </head>
+  <body>
+    <div id="game">
+      <h1>Image Flipping Game</h1>
+      <div id="info">
+        <p>Player 1 Score: <span id="player1-score">0</span></p>
+        <p>Player 2 Score: <span id="player2-score">0</span></p>
+        <p>Timer: <span id="timer">60</span> seconds</p>
+      </div>
+      <div id="buttons">
+        <button id="player1-btn" disabled>Player 1 Turn</button>
+        <button id="player2-btn" disabled>Player 2 Turn</button>
+      </div>
+      <div id="level-selection">
+        <button id="easy">Easy (3x3)</button>
+        <button id="medium">Medium (4x4)</button>
+        <button id="hard">Difficult (6x6)</button>
+      </div>
+      <div id="grid"></div>
+    </div>
+    <script src="flipgame.js"></script>
+  </body>
+</html>

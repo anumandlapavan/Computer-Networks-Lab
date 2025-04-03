@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <!-- Signup Form -->
+      <form id="signupForm" class="form">
+        <h2>Sign Up</h2>
+        <div class="form-group">
+          <label for="signupName">Name:</label>
+          <input
+            type="text"
+            id="signupName"
+            placeholder="Enter your name"
+            required
+          />
+          <span id="signupNameError" class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email:</label>
+          <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+            required
+          />
+          <span id="signupEmailError" class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password:</label>
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Enter your password"
+            required
+          />
+          <span id="signupPasswordError" class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="signupPasswordConfirm">PasswordConfirm:</label>
+          <input
+            type="password"
+            id="signupPasswordConfirm"
+            placeholder="Enter your password"
+            required
+          />
+          <span id="signupPasswordError" class="error-message"></span>
+        </div>
+        <button type="submit">Sign Up</button>
+        <p>
+          Already have an account?
+          <a href="./authLogin.html" id="toLogin">Login here</a>
+        </p>
+      </form>
+    </div>
+
+    <script src="authSignin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+      }
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select {
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+      .error {
+        border: 2px solid red;
+      }
+      .error-message {
+        color: red;
+        font-size: 12px;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .success-message {
+        color: green;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="userForm">
+      <label>Name:</label>
+      <input id="name" type="text" />
+      <span id="nameError" class="error-message"></span>
+
+      <label>Username:</label>
+      <input id="uname" type="text" />
+      <span id="unameError" class="error-message"></span>
+
+      <label>Password:</label>
+      <input id="paswd" type="text" />
+      <span id="paswdError" class="error-message"></span>
+
+      <label>Choose your choice:</label>
+      <select id="choice">
+        <option value="0">--Choose--</option>
+        <option value="Submit">Submit</option>
+        <option value="Reset">Reset</option>
+      </select>
+
+      <button type="submit">Submit</button>
+      <p id="successMessage" class="success-message"></p>
+    </form>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function validateInput(input, pattern, errorMessage, errorSpanId) {
+          let errorSpan = document.getElementById(errorSpanId);
+          if (!pattern.test(input.value)) {
+            input.classList.add("error");
+            errorSpan.textContent = errorMessage;
+            return false;
+          } else {
+            input.classList.remove("error");
+            errorSpan.textContent = "";
+            return true;
+          }
+        }
+
+        function validateName() {
+          return validateInput(
+            document.querySelector("#name"),
+            /^[A-Z][a-z]*$/,
+            "Name must start with a capital letter.",
+            "nameError"
+          );
+        }
+
+        function validateUsername() {
+          return validateInput(
+            document.querySelector("#uname"),
+            /^[A-Z][a-zA-Z0-9]{7,11}$/,
+            "Username must start with a capital letter and be 8 to 12 alphanumeric characters.",
+            "unameError"
+          );
+        }
+
+        function validatePassword() {
+          return validateInput(
+            document.querySelector("#paswd"),
+            /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])\d{4}$/,
+            "Password must be a valid date in DDMMYYYY format.",
+            "paswdError"
+          );
+        }
+
+        function handleChoiceChange() {
+          let choice = document.querySelector("#choice");
+          if (choice.value === "Reset") {
+            document.querySelector("#name").value = "";
+            document.querySelector("#uname").value = "";
+            document.querySelector("#paswd").value = "";
+
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("unameError").textContent = "";
+            document.getElementById("paswdError").textContent = "";
+            document.getElementById("successMessage").textContent = "";
+
+            document.querySelector("#name").classList.remove("error");
+            document.querySelector("#uname").classList.remove("error");
+            document.querySelector("#paswd").classList.remove("error");
+
+            choice.value = "0";
+          } else if (choice.value === "Submit") {
+            handleFormSubmit();
+          }
+        }
+
+        function handleFormSubmit(event) {
+          if (event) event.preventDefault(); // Prevent default only when manually submitting
+
+          let isValid =
+            validateName() && validateUsername() && validatePassword();
+
+          if (isValid) {
+            document.getElementById("successMessage").textContent =
+              "Form submitted successfully!";
+            document.getElementById("userForm").submit(); // Submit the form
+          } else {
+            document.getElementById("successMessage").textContent = "";
+          }
+        }
+
+        document.querySelector("#name").addEventListener("blur", validateName);
+        document
+          .querySelector("#uname")
+          .addEventListener("blur", validateUsername);
+        document
+          .querySelector("#paswd")
+          .addEventListener("blur", validatePassword);
+        document
+          .querySelector("#choice")
+          .addEventListener("change", handleChoiceChange);
+        document
+          .querySelector("#userForm")
+          .addEventListener("submit", handleFormSubmit);
+      });
+    </script>
+  </body>
+</html>

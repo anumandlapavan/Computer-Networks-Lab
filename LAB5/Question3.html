@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      .stopwatch {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 15px;
+        margin: 5px;
+        font-size: 1em;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stopwatch">00:00</div>
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="resume">Resume</button>
+    <button id="reset">Reset</button>
+
+    <script>
+      let time = 0;
+      let running = false;
+      let timeoutId;
+
+      function updateDisplay() {
+        const minutes = Math.floor(time / 60)
+          .toString()
+          .padStart(2, "0");
+        const seconds = (time % 60).toString().padStart(2, "0");
+        document.querySelector(".stopwatch").textContent =
+          `${minutes}:${seconds}`;
+      }
+
+      function tick() {
+        if (!running) return;
+        time++;
+        updateDisplay();
+        timeoutId = setTimeout(() => tick(), 1000);
+      }
+
+      function startTimer() {
+        if (running) return;
+        running = true;
+        tick();
+      }
+
+      function pauseTimer() {
+        running = false;
+        clearTimeout(timeoutId);
+      }
+
+      function resumeTimer() {
+        if (running) return;
+        running = true;
+        tick(); // Directly continue from where it was paused
+      }
+
+      function resetTimer() {
+        running = false;
+        clearTimeout(timeoutId);
+        time = 0;
+        updateDisplay();
+      }
+
+      document.getElementById("start").addEventListener("click", startTimer);
+      document.getElementById("pause").addEventListener("click", pauseTimer);
+      document.getElementById("resume").addEventListener("click", resumeTimer);
+      document.getElementById("reset").addEventListener("click", resetTimer);
+    </script>
+  </body>
+</html>

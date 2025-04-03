@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Your Category and Number</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        position: relative;
+      }
+      .container {
+        margin-top: 20px;
+      }
+      #imageContainer {
+        position: relative;
+        width: 80vw;
+        height: 60vh;
+        margin: 20px auto;
+        border: 2px solid black;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+      img {
+        position: absolute;
+        width: 128px;
+        height: 128px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Choose Your Category and Number</h2>
+    <div class="container">
+      <label for="category">Category: </label>
+      <select id="category">
+        <option value="">Choose your category</option>
+        <option value="Fruits">Fruits</option>
+        <option value="Animals">Animals</option>
+        <option value="Vehicles">Vehicles</option>
+      </select>
+
+      <label for="number">Number: </label>
+      <select id="number">
+        <option value="">Choose your choice</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div id="imageContainer"></div>
+
+    <script>
+      document
+        .getElementById("category")
+        .addEventListener("change", displayImages);
+      document
+        .getElementById("number")
+        .addEventListener("change", displayImages);
+
+      function displayImages() {
+        let category = document.getElementById("category").value;
+        let number = parseInt(document.getElementById("number").value);
+        let container = document.getElementById("imageContainer");
+        container.innerHTML = "";
+
+        if (!category || isNaN(number)) return;
+
+        let placedPositions = [];
+        for (let i = 0; i < number; i++) {
+          let img = document.createElement("img");
+          let randomImageNumber = Math.floor(Math.random() * 50) + 1;
+          img.src = `images/${category}/${randomImageNumber}.jpg`;
+
+          let x, y, overlap;
+          do {
+            overlap = false;
+            x = Math.floor(Math.random() * (container.clientWidth - 128));
+            y = Math.floor(Math.random() * (container.clientHeight - 128));
+            for (let pos of placedPositions) {
+              if (Math.abs(pos.x - x) < 128 && Math.abs(pos.y - y) < 128) {
+                overlap = true;
+                break;
+              }
+            }
+          } while (overlap);
+
+          placedPositions.push({ x, y });
+          img.style.left = x + "px";
+          img.style.top = y + "px";
+          container.appendChild(img);
+        }
+      }
+    </script>
+  </body>
+</html>

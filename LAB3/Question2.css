@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+#image-container {
+    position: relative;
+    width: 80vw;
+    height: 60vh;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+img {
+    position: absolute;
+    width: 128px;
+    height: 128px;
+}

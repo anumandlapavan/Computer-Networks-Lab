@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Your Category and Number</title>
+    <link rel="stylesheet" href="Question2.css" />
+  </head>
+  <body>
+    <h1>Choose Your Category and Number</h1>
+    <label for="category">Category:</label>
+    <select id="category" onchange="displayImages()">
+      <option value="">Choose your category</option>
+      <option value="Fruits">Fruits</option>
+      <option value="Animals">Animals</option>
+      <option value="Vehicles">Vehicles</option>
+    </select>
+
+    <label for="number">Number:</label>
+    <select id="number" onchange="displayImages()">
+      <option value="">Choose your choice</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+
+    <div id="image-container"></div>
+    <script src="Question2.js"></script>
+  </body>
+</html>
